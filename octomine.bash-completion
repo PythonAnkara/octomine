@@ -1,0 +1,29 @@
+__octomine()
+{
+    local cur prev opts fileopts diropts keywords
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="--infile --outfile --isprint --domain --floorcount --floorurllimit --withindexer --search --querylimit --queryskip"
+    keywords=""
+    fileopts=""
+    diropts=""
+
+    if [[ ${prev} =~ ${fileopts} ]]; then
+        COMPREPLY=( $(compgen -f -- ${cur}) )
+        return 0
+    elif [[ ${prev} =~ ${diropts} ]]; then
+        COMPREPLY=( $(compgen -d -- ${cur}) )
+        return 0
+    fi
+
+    if [[ ${cur} =~ : ]]; then
+        COMPREPLY=( $(compgen -W "${keywords}" -- ${cur}) )
+        return 0
+    elif [[ ${cur} == * ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+}
+
+complete -F __octomine octominemain

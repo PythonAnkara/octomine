@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+
+from octomine.crawler import Crawler
+from octomine.indexer import Indexer
+from octomine.search import Search
+from optparse import OptionParser
+
+
+def crawlbyDomain(domain, floorcount, floorurllimit, isprint, isindexer, opath):
+    cr = Crawler()
+    urllist = ['http://' + domain]
+    res = cr.crawl(urllist, is_lang_parse=True, floor_count=floorcount,
+            floor_url_limit=floorurllimit, is_print=isprint)
+    if isindexer:
+        ind = Indexer(domain, crawlerid=res)
+        ind.doIndexing()
+
+def crawlbyFile(filepath, floorcount, floorurllimit, isprint, isindexer, opath):
+    cr = Crawler()
+    urllist = []
+    with open(filepath, "r") as fl:
+        for i in fl.readlines():
+            urllist.append("http://" + i.strip())
+    res = cr.crawl(urllist, is_lang_parse=True, floor_count=floorcount,
+            floor_url_limit=floorurllimit, is_print=isprint)
+    if isindexer:
+        ind = Indexer(domain, crawlerid=res)
+        ind.doIndexing()
+
+def searchByFile(q, qlimit, qskip):
+    sr = Search()
+    sr.search(q, qlimit, qskip)
+    print(sr)
+
+if __name__ == "__main__":
+    parser = OptionParser()
+
+    parser.add_option("-i", "--infile", dest="infile",
+                help="get domain list to crawling in file", metavar="INFILE")
+    parser.add_option("-o", "--outfile", dest="outfile",
+                            help="write result to json file", metavar="OUTFILE")
+    parser.add_option("-p", "--isprint", dest="isprint", help="print result",
+                         action='store_true', metavar="ISPRINT", default=False)
+    parser.add_option("-d", "--domain", dest="domain", help="crawl by domain",
+                        metavar="DOMAIN")
+    parser.add_option("-f", "--floorcount", dest="floorcount",
+                help="declare max floor limit for crawl", metavar="FLOOTCOUNT")
+    parser.add_option("-g", "--floorurllimit", dest="floorurllimit",
+                    help="declare max floor url limit", metavar="floorurllimit")
+    parser.add_option("-w", "--withindexer", dest="withindexer",
+                                help="run indexer modul after crawl proccess",
+                     action='store_true', metavar="WITHINDEXER", default=False)
+    parser.add_option("-s", "--search", dest="search", help="searching",
+                        metavar="SEARCH")
+    parser.add_option("-l", "--querylimit", dest="querylimit", default=10,
+                  help="search get by limit. Default: 10", metavar="QUERYLIMIT")
+    parser.add_option("-k", "--queryskip", dest="queryskip", default=0,
+          help="search get by skiping list. Default: 0", metavar="QUERYLIMIT")
+
+
+
+    (options, args) = parser.parse_args()
+
+    outfile = ''
+    domain = None
+    floorcount = 2
+    floorurllimit = 20
+    isprint = options.isprint
+    isindexer = options.withindexer
+    search = None
+    searchlimit = 10
+    searchskip = 0
+
+    if options.outfile is not None: outfile = options.outfile
+    if options.floorcount is not None: floorcount = options.floorcount
+    if options.floorurllimit is not None: floorurllimit = options.floorurllimit
+    if options.domain is not None:
+        domain = options.domain
+        crawlbyDomain(domain, floorcount, floorurllimit, isprint, isindexer, outfile)
+    if options.infile is not None:
+        filepath = options.infile
+        crawlbyFile(filepath, floorcount, floorurllimit, isprint, isindexer, outfile)
+    if options.querylimit is not None: searchlimit = int(options.querylimit)
+    if options.queryskip is not None: searchskip = int(options.queryskip)
+    if options.search is not None:
+        search = options.search
+        searchByFile(search, searchlimit, searchskip)
