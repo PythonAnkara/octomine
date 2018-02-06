@@ -6,6 +6,8 @@ Octomine is open-source engine that make websites crawling, indexing and searchi
 
 ## 2. How to install Octomine
 
+**Python-source**: pip install octomine
+
 **Linux-source**: sudo python setup.py install
 
 **Virtualenv setup and configure**

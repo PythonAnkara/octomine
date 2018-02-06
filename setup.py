@@ -74,14 +74,15 @@ else:
     #print(_this_dir)
     #copyanything("octomine/data", "%s/octomine/data/" % _this_dir)
     params = {}
-
 setup(
     name='octomine',
-    version='0.1.4',
+    version='0.1.7',
     description='Octomine',
-    long_description='Web crawl and indexer engine',
+    long_description="""
+    Octomine is open-source engine that make websites crawling, indexing and searching. The whole system is developed with original algorithms in python programming language by PyAnkara team. Octomine is also allow to searching in websites which made crawl and index. Another feature is also it is used as a python module. If you want to use crawling, indexing and searching modules in your own projects, you can import it.
+    """,
     url = 'https://github.com/PythonAnkara/octomine', # use the URL to the github repo
-    download_url = 'https://github.com/PythonAnkara/octomine/dist/octomine-0.1.1.tar.gz', # I'll explain this in a second
+    download_url = 'https://github.com/PythonAnkara/octomine/blob/master/dist/octomine-0.1.7.tar.gz', # I'll explain this in a second
     author='PyAnkara',
     author_email='info@pyankara.org',
     scripts=['octominemain'],

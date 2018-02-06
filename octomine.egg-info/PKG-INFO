@@ -1,13 +1,15 @@
 Metadata-Version: 1.1
 Name: octomine
-Version: 0.1.4
+Version: 0.1.7
 Summary: Octomine
 Home-page: https://github.com/PythonAnkara/octomine
 Author: PyAnkara
 Author-email: info@pyankara.org
 License: UNKNOWN
-Download-URL: https://github.com/PythonAnkara/octomine/dist/octomine-0.1.1.tar.gz
-Description: Web crawl and indexer engine
+Download-URL: https://github.com/PythonAnkara/octomine/blob/master/dist/octomine-0.1.7.tar.gz
+Description: 
+            Octomine is open-source engine that make websites crawling, indexing and searching. The whole system is developed with original algorithms in python programming language by PyAnkara team. Octomine is also allow to searching in websites which made crawl and index. Another feature is also it is used as a python module. If you want to use crawling, indexing and searching modules in your own projects, you can import it.
+            
 Platform: UNKNOWN
 Classifier: Topic :: Multimedia :: Video
 Classifier: Development Status :: 5 - Production/Stable
