@@ -1,11 +1,12 @@
 Metadata-Version: 1.1
 Name: octomine
-Version: 0.1
+Version: 0.1.4
 Summary: Octomine
-Home-page: http://octomine.pyankara.org
+Home-page: https://github.com/PythonAnkara/octomine
 Author: PyAnkara
 Author-email: info@pyankara.org
 License: UNKNOWN
+Download-URL: https://github.com/PythonAnkara/octomine/dist/octomine-0.1.1.tar.gz
 Description: Web crawl and indexer engine
 Platform: UNKNOWN
 Classifier: Topic :: Multimedia :: Video

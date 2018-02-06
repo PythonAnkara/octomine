@@ -70,15 +70,18 @@ else:
             else:
                 resfiles.append(fn)
         data_files.append((dirname, resfiles))
-    copyanything("data", "%s/octomine/data/" % os.path.expanduser("~"))
+    _this_dir = os.path.dirname(os.path.abspath(__file__))
+    #print(_this_dir)
+    #copyanything("octomine/data", "%s/octomine/data/" % _this_dir)
     params = {}
 
 setup(
     name='octomine',
-    version='0.1',
+    version='0.1.4',
     description='Octomine',
     long_description='Web crawl and indexer engine',
-    url='http://octomine.pyankara.org',
+    url = 'https://github.com/PythonAnkara/octomine', # use the URL to the github repo
+    download_url = 'https://github.com/PythonAnkara/octomine/dist/octomine-0.1.1.tar.gz', # I'll explain this in a second
     author='PyAnkara',
     author_email='info@pyankara.org',
     scripts=['octominemain'],
@@ -90,7 +93,8 @@ setup(
         'requests',
         'langdetect'
     ],
-
+    #data_files = [('octomine/data/', ['octomine/data/effective_tld_names.dat'])],
+    package_data={'octomine': ['data/*dat']},
     # Provokes warning on most systems (why?!)
     # test_suite = 'nose.collector',
     # test_requires = ['nosetest'],
