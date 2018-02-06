@@ -7,7 +7,8 @@ class SearchResult(object):
     """ result returner """
     def __init__(self, title, description, url, language, domain, created_at):
         super(SearchResult, self).__init__()
-        self._main_data_folder = "%s/octomine/data/" % os.path.expanduser("~")
+        self._this_dir, self._this_filename = os.path.split(__file__)
+        self._main_data_folder = "%s/data/" % self._this_dir
 
         self.title = title
         self.description = description
@@ -22,8 +23,16 @@ class Search(object):
     """Octomine searching library"""
     def __init__(self):
         super(Search, self).__init__()
-        self._main_data_folder = "%s/octomine/data/" % os.path.expanduser("~")
+        self.skip = 0
+        self.limit = 10
+        self.result_all_count = 0
+        self.query = ""
+        self.result = ()
+        self.query_time = 0.0
+        self._this_dir, self._this_filename = os.path.split(__file__)
+        self._main_data_folder = "%s/data/" % self._this_dir
         filename = os.path.join(self._main_data_folder, "index_results")
+        print(filename)
         self._conn = shelve.open(filename)
         if not os.path.isdir(self._main_data_folder):
             os.makedirs(self._main_data_folder)

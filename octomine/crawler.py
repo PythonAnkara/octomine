@@ -20,9 +20,10 @@ class Crawler(object):
     """Web crawling class """
     def __init__(self):
         super(Crawler, self).__init__()
+        #path = os.path.dirname(self.__file__)
         self._this_dir, self._this_filename = os.path.split(__file__)
-        self._tmp_data_folder = "%s/octomine/tmp/" % expanduser("~")
-        self._main_data_folder = "%s/octomine/data/" % expanduser("~")
+        self._tmp_data_folder = "%s/tmp/" % self._this_dir
+        self._main_data_folder = "%s/data/" % self._this_dir
         if not os.path.isdir(self._tmp_data_folder):
             os.makedirs(self._tmp_data_folder)
         if not os.path.isdir(self._main_data_folder):
